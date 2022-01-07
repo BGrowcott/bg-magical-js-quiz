@@ -13,9 +13,14 @@ const op3 = document.querySelector("#op3");
 const op3Label = document.querySelector("#op3Label");
 const op4 = document.querySelector("#op4");
 const op4Label = document.querySelector("#op4Label");
-
+const subHigh = document.querySelector('#subHigh')
+const userName = document.querySelector('#name')
+const highScores = document.querySelector('#highScores')
 let score = 0;
 
+renderHighScores()
+
+// Questions
 const answerForm1 = function () {
   question.innerHTML = "Which of these functions has INCORRECT syntax?";
   op1.setAttribute("value", "incorrect");
@@ -84,11 +89,17 @@ const answerForm5 = function () {
   op4Label.innerHTML = "answer4";
 };
 
+// Results
 const results = function () {
-    
+    document.getElementsByClassName('instructions')[0].style.display = 'none'
+    document.getElementsByClassName('instructions')[1].style.display = 'none'
+    timer.style.display = 'none'
+    answers.style.display = 'none'
+    document.querySelector('#results').style.display = 'block'
+    document.querySelector('#result').innerHTML = score
 }
 
-let questionArray = [answerForm2, answerForm3, answerForm4, answerForm5]
+let questionArray = [answerForm2, answerForm3, answerForm4, answerForm5, results]
 
 // Timer function
 let timeLeft = 60;
@@ -111,7 +122,7 @@ startBtn.addEventListener("click", () => {
   options.style.display = "flex";
 });
 
-// check answer
+// check answer and display next question
 let i = 0
 submit.addEventListener("click", (e) => {
   e.preventDefault();
@@ -124,7 +135,7 @@ submit.addEventListener("click", (e) => {
   ) {
       rightOrWrong.style.color = 'green'
     rightOrWrong.innerHTML = "CORRECT!";
-    score = score + 10;
+    score = score + 1   ;
   } else {
       rightOrWrong.style.color = 'red'
     rightOrWrong.innerHTML = "INCORRECT!";
@@ -135,3 +146,24 @@ submit.addEventListener("click", (e) => {
     }
   }
 });
+
+// Adding name to highscores
+
+subHigh.addEventListener('click', function (e){
+    e.preventDefault()
+    let userInput = userName.value
+    if (userInput === '') {
+        // add something to explain
+        return
+    }
+    localStorage.setItem('name', userInput)
+    localStorage.setItem('score', score)
+    renderHighScores()
+})
+
+//render Hiscores
+function renderHighScores () {
+    let userScore = document.createElement('li')
+    userScore.innerText = `${localStorage.getItem('name')}: ${localStorage.getItem('score')}`
+    highScores.appendChild(userScore)
+}

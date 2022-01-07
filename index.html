@@ -35,15 +35,16 @@
                 </div> 
                 <div id="results">
                     <p>Congratulations!</p>
-                    <p>You answered <span id='score'>#</span> questions out of 5 correctly</p>
+                    <p>You answered <span id='result'>#</span> questions out of 5 correctly</p>
                     <form action="post">
                         <div id="highScoresContainer">
                         <h2>Highscores:</h2>
-                        <ul id="highScores"></ul>
+                        <ol id="highScores"></ol>
                         </div>
                         <label for="name">Enter your name:</label>
                         <input type="text" id='name'><br>                        
-                        <button>Submit</button>
+                        <button id="subHigh">Submit</button><br>
+                        <button id="reset">Try Quiz Again?</button>
                     </form>
                 </div>               
             </section>

@@ -25,11 +25,11 @@ article {
     font-family: monospace;
 }
 
-form label {
+#options label {
     width: 90%;
 }
 
-form input {
+#options input {
    width: 10%;
 }
 
@@ -40,4 +40,12 @@ div {
 #timer {
     margin: 10px;
     color: red;
+}
+
+#results {
+    display: none;
+}
+
+#results button {
+    margin: 5px;
 }
