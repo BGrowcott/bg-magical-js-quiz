@@ -1,52 +1,94 @@
 const timer = document.querySelector("#timer");
 const startBtn = document.querySelector("#startBtn");
-const question = document.querySelector('#question');
-const answers = document.querySelector('#answers')
-const submit = document.querySelector('#submit')
-const rightOrWrong = document.querySelector('#RorW')
+const question = document.querySelector("#question");
+const answers = document.querySelector("#answers");
+const submit = document.querySelector("#submit");
+const rightOrWrong = document.querySelector("#RorW");
+const options = document.querySelector("#options");
+const op1 = document.querySelector("#op1");
+const op1Label = document.querySelector("#op1Label");
+const op2 = document.querySelector("#op2");
+const op2Label = document.querySelector("#op2Label");
+const op3 = document.querySelector("#op3");
+const op3Label = document.querySelector("#op3Label");
+const op4 = document.querySelector("#op4");
+const op4Label = document.querySelector("#op4Label");
 
-const q1 = 'Which of these functions has INCORRECT syntax?'
-const q1Answers = function() {
-    let options = document.createElement('form')
-    let op1 = document.createElement('input')
-    let op1Label = document.createElement('label')
-    let op2 = document.createElement('input')
-    let op2Label = document.createElement('label')
-    let op3 = document.createElement('input')
-    let op3Label = document.createElement('label')
-    let op4 = document.createElement('input')
-    let op4Label = document.createElement('label')
-    op1.setAttribute('id', 'op1')
-    op1.setAttribute('type', 'radio')
-    op1.setAttribute('name', 'quiz1')
-    op1.setAttribute('value', 'incorrect')
-    op1Label.setAttribute('for', 'op1')
-    op2.setAttribute('id', 'op2')
-    op2.setAttribute('type', 'radio')
-    op2.setAttribute('name', 'quiz1')
-    op2.setAttribute('value', 'incorrect')
-    op2Label.setAttribute('for', 'op2')
-    op3.setAttribute('id', 'op3')
-    op3.setAttribute('type', 'radio')
-    op3.setAttribute('name', 'quiz1')
-    op3.setAttribute('value', 'incorrect')
-    op3Label.setAttribute('for', 'op3')
-    op4.setAttribute('id', 'op4')
-    op4.setAttribute('type', 'radio')
-    op4.setAttribute('name', 'quiz1')
-    op4.setAttribute('value', 'correct')
-    op4Label.setAttribute('for', 'op4')
-    op1Label.innerHTML = 'let sum = function (x, y) {return x + y}'
-    op2Label.innerHTML = 'function square (x) {return x * x}'
-    op3Label.innerHTML = 'let square = x => {return x * x}'
-    op4Label.innerHTML = 'let sum = x, y => {return x + y}'
-    let answerArray = [op1, op1Label, op2, op2Label, op3, op3Label, op4, op4Label, submit]
-    for (let el of answerArray) {
-        options.appendChild(el)
-    }
-    return options
+let score = 0;
+
+const answerForm1 = function () {
+  question.innerHTML = "Which of these functions has INCORRECT syntax?";
+  op1.setAttribute("value", "incorrect");
+  op2.setAttribute("value", "incorrect");
+  op3.setAttribute("value", "incorrect");
+  op4.setAttribute("value", "correct");
+  op1Label.innerHTML = "let sum = function (x, y) {return x + y}";
+  op2Label.innerHTML = "function square (x) {return x * x}";
+  op3Label.innerHTML = "let square = x => {return x * x}";
+  op4Label.innerHTML = "let sum = x, y => {return x + y}";
+};
+
+const answerForm2 = function () {
+    rightOrWrong.innerHTML=''
+    submit.style.display = 'block'
+  question.innerHTML = "Question2";
+  op1.setAttribute("value", "incorrect");
+  op2.setAttribute("value", "incorrect");
+  op3.setAttribute("value", "correct");
+  op4.setAttribute("value", "incorrect");
+  op1Label.innerHTML = "answer1";
+  op2Label.innerHTML = "answer2";
+  op3Label.innerHTML = "answer3";
+  op4Label.innerHTML = "answer4";
+};
+
+const answerForm3 = function () {
+    rightOrWrong.innerHTML=''
+    submit.style.display = 'block'
+  question.innerHTML = "Question3";
+  op1.setAttribute("value", "incorrect");
+  op2.setAttribute("value", "incorrect");
+  op3.setAttribute("value", "correct");
+  op4.setAttribute("value", "incorrect");
+  op1Label.innerHTML = "answer1";
+  op2Label.innerHTML = "answer2";
+  op3Label.innerHTML = "answer3";
+  op4Label.innerHTML = "answer4";
+};
+
+const answerForm4 = function () {
+    rightOrWrong.innerHTML=''
+    submit.style.display = 'block'
+  question.innerHTML = "Question4";
+  op1.setAttribute("value", "incorrect");
+  op2.setAttribute("value", "incorrect");
+  op3.setAttribute("value", "correct");
+  op4.setAttribute("value", "incorrect");
+  op1Label.innerHTML = "answer1";
+  op2Label.innerHTML = "answer2";
+  op3Label.innerHTML = "answer3";
+  op4Label.innerHTML = "answer4";
+};
+
+const answerForm5 = function () {
+    rightOrWrong.innerHTML=''
+    submit.style.display = 'block'
+  question.innerHTML = "Question5";
+  op1.setAttribute("value", "incorrect");
+  op2.setAttribute("value", "incorrect");
+  op3.setAttribute("value", "correct");
+  op4.setAttribute("value", "incorrect");
+  op1Label.innerHTML = "answer1";
+  op2Label.innerHTML = "answer2";
+  op3Label.innerHTML = "answer3";
+  op4Label.innerHTML = "answer4";
+};
+
+const results = function () {
+    
 }
 
+let questionArray = [answerForm2, answerForm3, answerForm4, answerForm5]
 
 // Timer function
 let timeLeft = 60;
@@ -55,26 +97,41 @@ const countDown = function () {
     timeLeft--;
     timer.innerHTML = `${timeLeft} seconds remaining.`;
 
-    if (timeLeft === 0) {
+    if (timeLeft <= 0) {
       clearInterval(interval);
+      timer.innerHTML = `Times Up!`;
     }
   }, 1000);
 };
-// Begin timer with start button & start button disappears
+// Begin timer & start button disappears
 startBtn.addEventListener("click", countDown);
 startBtn.addEventListener("click", () => {
+  answerForm1();
   startBtn.style.display = "none";
-  submit.style.display = "block";
-  question.innerHTML = q1
-  answers.appendChild(q1Answers())
+  options.style.display = "flex";
 });
-submit.addEventListener('click', (e) => {
-    e.preventDefault()
-    if (document.querySelector('input[name="quiz1"]:checked').value === 'correct') {
-        rightOrWrong.innerHTML = 'CORRECT!'
+
+// check answer
+let i = 0
+submit.addEventListener("click", (e) => {
+  e.preventDefault();
+  submit.style.display = 'none'
+  setTimeout(questionArray[i], 1000)
+  i++
+    if (
+    document.querySelector('input[name="quizOptions"]:checked').value ===
+    "correct"
+  ) {
+      rightOrWrong.style.color = 'green'
+    rightOrWrong.innerHTML = "CORRECT!";
+    score = score + 10;
+  } else {
+      rightOrWrong.style.color = 'red'
+    rightOrWrong.innerHTML = "INCORRECT!";
+    timeLeft = timeLeft - 10;
+    timer.innerHTML = `${timeLeft} seconds remaining.`;
+    if (timeLeft <= 0) {
+      timer.innerHTML = `Times Up!`;
     }
-    else {rightOrWrong.innerHTML = 'INCORRECT!'}
-})
-
-
-
+  }
+});

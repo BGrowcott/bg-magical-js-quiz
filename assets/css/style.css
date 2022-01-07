@@ -13,14 +13,11 @@ article {
     width: 90%;
     margin-top: 50px;
     line-height: 150%;
+    background-color: rgb(201, 247, 250);
 }
 
-#submit {
+#options {
     display: none;
-}
-
-form {
-    display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
@@ -36,3 +33,11 @@ form input {
    width: 10%;
 }
 
+div {
+    margin: 10px;
+}
+
+#timer {
+    margin: 10px;
+    color: red;
+}

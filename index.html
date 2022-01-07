@@ -14,13 +14,38 @@
         <article>                
             <section id='quizContainer'>
                 <h1>Ben's JavaScript Quiz</h1>
-                <p>You have 60 seconds to answer questions. Press the start button to begin.</p>
+                <p class='instructions'>You have 60 seconds to answer questions. Press the start button to begin.</p>
+                <p class='instructions'>Incorrect answers will deduct 10 seconds from your time.</p>
                 <span id="timer">60 seconds remaining.</span>
                 <button id="startBtn">Start</button>
-                <div id="question"></div>
-                <div id="answers"></div>
-                <button id='submit'>Submit</button>
-                <p id="RorW"></p>
+                <div id="answers">
+                    <div id="question"></div>
+                    <form id='options' action="post">
+                        <input id="op1" type="radio" name='quizOptions'>
+                        <label for="op1" id="op1Label"></label>
+                        <input id="op2" type="radio" name='quizOptions'>
+                        <label for="op2" id="op2Label"></label>
+                        <input id="op3"  type="radio" name='quizOptions'>
+                        <label for="op3" id="op3Label"></label>
+                        <input id="op4"  type="radio" name='quizOptions'>
+                        <label for="op4" id="op4Label"></label>
+                        <button id='submit'>Submit</button>
+                        <p id="RorW"></p>
+                    </form>
+                </div> 
+                <div id="results">
+                    <p>Congratulations!</p>
+                    <p>You answered <span id='score'>#</span> questions out of 5 correctly</p>
+                    <form action="post">
+                        <div id="highScoresContainer">
+                        <h2>Highscores:</h2>
+                        <ul id="highScores"></ul>
+                        </div>
+                        <label for="name">Enter your name:</label>
+                        <input type="text" id='name'><br>                        
+                        <button>Submit</button>
+                    </form>
+                </div>               
             </section>
         </article>
     </main>
