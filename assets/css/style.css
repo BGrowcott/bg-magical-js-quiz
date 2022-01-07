@@ -1,0 +1,38 @@
+article {
+    display: flex;
+    justify-content: center;
+}
+
+#quizContainer {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 5px solid black;
+    width: 90%;
+    margin-top: 50px;
+    line-height: 150%;
+}
+
+#submit {
+    display: none;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: left;
+    font-family: monospace;
+}
+
+form label {
+    width: 90%;
+}
+
+form input {
+   width: 10%;
+}
+
