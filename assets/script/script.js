@@ -17,7 +17,6 @@ const subHigh = document.querySelector("#subHigh");
 const userName = document.querySelector("#name");
 const highScores = document.querySelector("#highScores");
 let score = 0;
-
 let highScoresArray = JSON.parse(localStorage.getItem("highscores"));
 
 // Questions
@@ -95,10 +94,13 @@ const answerForm5 = function () {
 
 // Results view
 const results = function () {
+
+  // if local storage is empty give it an empty array to start off with
   if (localStorage.getItem("highscores") == null) {
     console.log(null)
     localStorage.setItem("highscores", "[]");
   }
+
   renderHighScores();
   document.getElementsByClassName("instructions")[0].style.display = "none";
   document.getElementsByClassName("instructions")[1].style.display = "none";
@@ -108,6 +110,7 @@ const results = function () {
   document.querySelector("#result").innerHTML = score;
 };
 
+//Form an array of question pages + results
 let questionArray = [
   answerForm2,
   answerForm3,
@@ -122,7 +125,7 @@ const countDown = function () {
   let interval = setInterval(function () {
     timeLeft--;
     timer.innerHTML = `${timeLeft} seconds remaining.`;
-
+    // Out of time
     if (timeLeft <= 0) {
       clearInterval(interval);
       timer.innerHTML = `Whoops! You ran out of time!`;
@@ -140,49 +143,63 @@ startBtn.addEventListener("click", () => {
 });
 
 // check answer and display next question
-let i = 0;
+let questionArrayIndex = 0;
 submit.addEventListener("click", (e) => {
   e.preventDefault();
+  // make sure at least one answer is chosen
+  if (document.querySelector('input[name="quizOptions"]:checked') == null){return}
+
   submit.style.display = "none";
-  setTimeout(questionArray[i], 1000);
-  i++;
+
+  //move on to next question after 1s
+  setTimeout(questionArray[questionArrayIndex], 1000);
+  questionArrayIndex++;
+
+  // display if answer is right or wrong
   if (
     document.querySelector('input[name="quizOptions"]:checked').value ===
     "correct"
   ) {
     rightOrWrong.style.color = "green";
     rightOrWrong.innerHTML = "CORRECT!";
-    score = score + 1;
+    // increase score
+    score++;
   } else {
     rightOrWrong.style.color = "red";
     rightOrWrong.innerHTML = "INCORRECT!";
+    //deduct time
     timeLeft = timeLeft - 10;
     timer.innerHTML = `${timeLeft} seconds remaining.`;
+    // out of time
     if (timeLeft <= 0) {
       timer.innerHTML = `Times Up!`;
     }
   }
 });
 
-// Adding name to highscores
+// Adding name to high scores
 
 subHigh.addEventListener("click", function (e) {
   e.preventDefault();
   let userInput = userName.value;
   if (userInput === "") {
-    // add something to explain
+    // add something to explain to user
     return;
   }
+  // make user name and score into a string
   userHighScore = `${userInput}: ${score}`;
+  // push that string into local storage array 
   highScoresArray.push(userHighScore);
   localStorage.setItem("highscores", JSON.stringify(highScoresArray));
+  // add latest score to page
   renderNewScore();
+  //stop user adding themselves lots of times
   subHigh.style.display = "none";
   userName.style.display = "none";
   document.querySelector("#namelabel").style.display = "none";
 });
 
-//render Hiscores
+//render previous high scores from local storage array
 function renderHighScores() {
   for (i = 0; i < highScoresArray.length; i++) {
     let userScore = document.createElement("li");
@@ -193,6 +210,7 @@ function renderHighScores() {
     highScores.appendChild(userScore);
   }
 }
+
 //render new score
 function renderNewScore() {
   let userScore = document.createElement("li");
