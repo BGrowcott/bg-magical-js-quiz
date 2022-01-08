@@ -49,3 +49,7 @@ div {
 #results button {
     margin: 5px;
 }
+
+#timesUp {
+    display: none;
+}

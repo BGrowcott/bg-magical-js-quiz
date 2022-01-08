@@ -13,12 +13,12 @@ const op3 = document.querySelector("#op3");
 const op3Label = document.querySelector("#op3Label");
 const op4 = document.querySelector("#op4");
 const op4Label = document.querySelector("#op4Label");
-const subHigh = document.querySelector('#subHigh')
-const userName = document.querySelector('#name')
-const highScores = document.querySelector('#highScores')
+const subHigh = document.querySelector("#subHigh");
+const userName = document.querySelector("#name");
+const highScores = document.querySelector("#highScores");
 let score = 0;
 
-renderHighScores()
+let highScoresArray = JSON.parse(localStorage.getItem("highscores"));
 
 // Questions
 const answerForm1 = function () {
@@ -34,22 +34,24 @@ const answerForm1 = function () {
 };
 
 const answerForm2 = function () {
-    rightOrWrong.innerHTML=''
-    submit.style.display = 'block'
-  question.innerHTML = "Question2";
-  op1.setAttribute("value", "incorrect");
+  document.querySelector('input[name="quizOptions"]:checked').checked = false
+  rightOrWrong.innerHTML = "";
+  submit.style.display = "block";
+  question.innerHTML = "Is Jichao Chinese?";
+  op1.setAttribute("value", "correct");
   op2.setAttribute("value", "incorrect");
-  op3.setAttribute("value", "correct");
+  op3.setAttribute("value", "incorrect");
   op4.setAttribute("value", "incorrect");
-  op1Label.innerHTML = "answer1";
-  op2Label.innerHTML = "answer2";
-  op3Label.innerHTML = "answer3";
-  op4Label.innerHTML = "answer4";
+  op1Label.innerHTML = "Yes";
+  op2Label.innerHTML = "No";
+  op3Label.innerHTML = "Maybe";
+  op4Label.innerHTML = "Don't know";
 };
 
 const answerForm3 = function () {
-    rightOrWrong.innerHTML=''
-    submit.style.display = 'block'
+  document.querySelector('input[name="quizOptions"]:checked').checked = false
+  rightOrWrong.innerHTML = "";
+  submit.style.display = "block";
   question.innerHTML = "Question3";
   op1.setAttribute("value", "incorrect");
   op2.setAttribute("value", "incorrect");
@@ -62,8 +64,9 @@ const answerForm3 = function () {
 };
 
 const answerForm4 = function () {
-    rightOrWrong.innerHTML=''
-    submit.style.display = 'block'
+  document.querySelector('input[name="quizOptions"]:checked').checked = false
+  rightOrWrong.innerHTML = "";
+  submit.style.display = "block";
   question.innerHTML = "Question4";
   op1.setAttribute("value", "incorrect");
   op2.setAttribute("value", "incorrect");
@@ -76,8 +79,9 @@ const answerForm4 = function () {
 };
 
 const answerForm5 = function () {
-    rightOrWrong.innerHTML=''
-    submit.style.display = 'block'
+  document.querySelector('input[name="quizOptions"]:checked').checked = false
+  rightOrWrong.innerHTML = "";
+  submit.style.display = "block";
   question.innerHTML = "Question5";
   op1.setAttribute("value", "incorrect");
   op2.setAttribute("value", "incorrect");
@@ -89,17 +93,28 @@ const answerForm5 = function () {
   op4Label.innerHTML = "answer4";
 };
 
-// Results
+// Results view
 const results = function () {
-    document.getElementsByClassName('instructions')[0].style.display = 'none'
-    document.getElementsByClassName('instructions')[1].style.display = 'none'
-    timer.style.display = 'none'
-    answers.style.display = 'none'
-    document.querySelector('#results').style.display = 'block'
-    document.querySelector('#result').innerHTML = score
-}
+  if (localStorage.getItem("highscores") == null) {
+    console.log(null)
+    localStorage.setItem("highscores", "[]");
+  }
+  renderHighScores();
+  document.getElementsByClassName("instructions")[0].style.display = "none";
+  document.getElementsByClassName("instructions")[1].style.display = "none";
+  timer.style.display = "none";
+  answers.style.display = "none";
+  document.querySelector("#results").style.display = "block";
+  document.querySelector("#result").innerHTML = score;
+};
 
-let questionArray = [answerForm2, answerForm3, answerForm4, answerForm5, results]
+let questionArray = [
+  answerForm2,
+  answerForm3,
+  answerForm4,
+  answerForm5,
+  results,
+];
 
 // Timer function
 let timeLeft = 60;
@@ -110,7 +125,9 @@ const countDown = function () {
 
     if (timeLeft <= 0) {
       clearInterval(interval);
-      timer.innerHTML = `Times Up!`;
+      timer.innerHTML = `Whoops! You ran out of time!`;
+      document.querySelector("#timesUp").style.display = "block";
+      answers.style.display = "none";
     }
   }, 1000);
 };
@@ -123,21 +140,21 @@ startBtn.addEventListener("click", () => {
 });
 
 // check answer and display next question
-let i = 0
+let i = 0;
 submit.addEventListener("click", (e) => {
   e.preventDefault();
-  submit.style.display = 'none'
-  setTimeout(questionArray[i], 1000)
-  i++
-    if (
+  submit.style.display = "none";
+  setTimeout(questionArray[i], 1000);
+  i++;
+  if (
     document.querySelector('input[name="quizOptions"]:checked').value ===
     "correct"
   ) {
-      rightOrWrong.style.color = 'green'
+    rightOrWrong.style.color = "green";
     rightOrWrong.innerHTML = "CORRECT!";
-    score = score + 1   ;
+    score = score + 1;
   } else {
-      rightOrWrong.style.color = 'red'
+    rightOrWrong.style.color = "red";
     rightOrWrong.innerHTML = "INCORRECT!";
     timeLeft = timeLeft - 10;
     timer.innerHTML = `${timeLeft} seconds remaining.`;
@@ -149,21 +166,46 @@ submit.addEventListener("click", (e) => {
 
 // Adding name to highscores
 
-subHigh.addEventListener('click', function (e){
-    e.preventDefault()
-    let userInput = userName.value
-    if (userInput === '') {
-        // add something to explain
-        return
-    }
-    localStorage.setItem('name', userInput)
-    localStorage.setItem('score', score)
-    renderHighScores()
-})
+subHigh.addEventListener("click", function (e) {
+  e.preventDefault();
+  let userInput = userName.value;
+  if (userInput === "") {
+    // add something to explain
+    return;
+  }
+  userHighScore = `${userInput}: ${score}`;
+  highScoresArray.push(userHighScore);
+  localStorage.setItem("highscores", JSON.stringify(highScoresArray));
+  renderNewScore();
+  subHigh.style.display = "none";
+  userName.style.display = "none";
+  document.querySelector("#namelabel").style.display = "none";
+});
 
 //render Hiscores
-function renderHighScores () {
-    let userScore = document.createElement('li')
-    userScore.innerText = `${localStorage.getItem('name')}: ${localStorage.getItem('score')}`
-    highScores.appendChild(userScore)
+function renderHighScores() {
+  for (i = 0; i < highScoresArray.length; i++) {
+    let userScore = document.createElement("li");
+    userScore.innerText = `${
+      JSON.parse(localStorage.getItem("highscores"))[i]
+    }`;
+    if (JSON.parse(localStorage.getItem("highscores"))[i] === undefined) {return}
+    highScores.appendChild(userScore);
+  }
 }
+//render new score
+function renderNewScore() {
+  let userScore = document.createElement("li");
+  userScore.innerText = `${userHighScore}`;
+  highScores.appendChild(userScore);
+}
+
+//restart buttons
+
+const restartBtns = document.querySelectorAll(".reset");
+for (let button of restartBtns) {
+button.addEventListener("click", (e) => {
+  
+  e.preventDefault();
+  location.reload();
+});}
