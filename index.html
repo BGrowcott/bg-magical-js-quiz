@@ -14,9 +14,10 @@
         <article>                
             <section id='quizContainer'>
                 <h1>Ben's JavaScript Quiz</h1>
-                <p class='instructions'>You have 60 seconds to answer questions. Press the start button to begin.</p>
+                <p class='instructions'>You have 60 seconds to answer questions.</p>
                 <p class='instructions'>Incorrect answers will deduct 10 seconds from your time.</p>
-                <span id="timer">60 seconds remaining.</span>
+                <p class='instructions'>Press the start button to begin.</p>
+                <span id="timer">60</span>
                 <button id="startBtn">Start</button>
                 <button id='timesUp' class="reset">Try Quiz Again?</button>
                 <div id="answers">
@@ -30,12 +31,12 @@
                         <label for="op3" id="op3Label"></label>
                         <input id="op4"  type="radio" name='quizOptions'>
                         <label for="op4" id="op4Label"></label>
-                        <button id='submit'>Submit</button>
-                        <p id="RorW"></p>
                     </form>
+                    <button id='submit'>Submit</button>
+                    <p id="RorW"></p>
                 </div> 
                 <div id="results">
-                    <p>Congratulations!</p>
+                    <p><strong>Congratulations!</strong></p>
                     <p>You answered <span id='result'>#</span> questions out of 5 correctly</p>
                     <form action="post">
                         <div id="highScoresContainer">

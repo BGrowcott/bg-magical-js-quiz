@@ -16,11 +16,19 @@ const op4Label = document.querySelector("#op4Label");
 const subHigh = document.querySelector("#subHigh");
 const userName = document.querySelector("#name");
 const highScores = document.querySelector("#highScores");
+const instructions = document.getElementsByClassName('instructions')
 let score = 0;
 let highScoresArray = JSON.parse(localStorage.getItem("highscores"));
 
+// if local storage is empty give it an empty array to start off with
+if (localStorage.getItem("highscores") == null) {
+  localStorage.setItem("highscores", "[]");
+}
+
 // Questions
 const answerForm1 = function () {
+  options.setAttribute('class', 'fadeIn')
+  submit.style.display = "block";
   question.innerHTML = "Which of these functions has INCORRECT syntax?";
   op1.setAttribute("value", "incorrect");
   op2.setAttribute("value", "incorrect");
@@ -33,7 +41,8 @@ const answerForm1 = function () {
 };
 
 const answerForm2 = function () {
-  document.querySelector('input[name="quizOptions"]:checked').checked = false
+  options.setAttribute('class', 'fadeIn')
+  document.querySelector('input[name="quizOptions"]:checked').checked = false;
   rightOrWrong.innerHTML = "";
   submit.style.display = "block";
   question.innerHTML = "Is Jichao Chinese?";
@@ -48,37 +57,40 @@ const answerForm2 = function () {
 };
 
 const answerForm3 = function () {
-  document.querySelector('input[name="quizOptions"]:checked').checked = false
+  options.setAttribute('class', 'fadeIn')
+  document.querySelector('input[name="quizOptions"]:checked').checked = false;
   rightOrWrong.innerHTML = "";
   submit.style.display = "block";
-  question.innerHTML = "Question3";
+  question.innerHTML = "How does a FOR loop start?";
   op1.setAttribute("value", "incorrect");
   op2.setAttribute("value", "incorrect");
   op3.setAttribute("value", "correct");
   op4.setAttribute("value", "incorrect");
-  op1Label.innerHTML = "answer1";
-  op2Label.innerHTML = "answer2";
-  op3Label.innerHTML = "answer3";
-  op4Label.innerHTML = "answer4";
+  op1Label.innerHTML = "for (i = 0; i <= 5)";
+  op2Label.innerHTML = "for (i = to 5, i + 1)";
+  op3Label.innerHTML = "for (i = 0; i <= 5; i++)";
+  op4Label.innerHTML = "for (i <= 5; i++)";
 };
 
 const answerForm4 = function () {
-  document.querySelector('input[name="quizOptions"]:checked').checked = false
+  options.setAttribute('class', 'fadeIn')
+  document.querySelector('input[name="quizOptions"]:checked').checked = false;
   rightOrWrong.innerHTML = "";
   submit.style.display = "block";
-  question.innerHTML = "Question4";
+  question.innerHTML = "What is the correct way to write a JavaScript array?";
   op1.setAttribute("value", "incorrect");
   op2.setAttribute("value", "incorrect");
-  op3.setAttribute("value", "correct");
+  op3.setAttribute("value", "incorrect");
   op4.setAttribute("value", "incorrect");
-  op1Label.innerHTML = "answer1";
-  op2Label.innerHTML = "answer2";
-  op3Label.innerHTML = "answer3";
-  op4Label.innerHTML = "answer4";
+  op1Label.innerHTML = "let dogs = 'Barry', 'Rocket', 'Francis'";
+  op2Label.innerHTML = "let cats = [Tyrone], [Wilson], [Mr Cuddlesworth]";
+  op3Label.innerHTML = "let dogs = (Berry, Rocket, Francis)";
+  op4Label.innerHTML = "let cats = ['Tyrone', 'Wilson', 'Mr Cuddlesworth']";
 };
 
 const answerForm5 = function () {
-  document.querySelector('input[name="quizOptions"]:checked').checked = false
+  options.setAttribute('class', 'fadeIn')
+  document.querySelector('input[name="quizOptions"]:checked').checked = false;
   rightOrWrong.innerHTML = "";
   submit.style.display = "block";
   question.innerHTML = "Question5";
@@ -94,19 +106,11 @@ const answerForm5 = function () {
 
 // Results view
 const results = function () {
-
-  // if local storage is empty give it an empty array to start off with
-  if (localStorage.getItem("highscores") == null) {
-    console.log(null)
-    localStorage.setItem("highscores", "[]");
-  }
-
   renderHighScores();
-  document.getElementsByClassName("instructions")[0].style.display = "none";
-  document.getElementsByClassName("instructions")[1].style.display = "none";
   timer.style.display = "none";
   answers.style.display = "none";
   document.querySelector("#results").style.display = "block";
+  document.querySelector('#results').setAttribute('class', 'fadeIn')
   document.querySelector("#result").innerHTML = score;
 };
 
@@ -124,7 +128,7 @@ let timeLeft = 60;
 const countDown = function () {
   let interval = setInterval(function () {
     timeLeft--;
-    timer.innerHTML = `${timeLeft} seconds remaining.`;
+    timer.innerHTML = `${timeLeft}`;
     // Out of time
     if (timeLeft <= 0) {
       clearInterval(interval);
@@ -138,22 +142,32 @@ const countDown = function () {
 startBtn.addEventListener("click", countDown);
 startBtn.addEventListener("click", () => {
   answerForm1();
+  for (let paragraphs of instructions) {
+    paragraphs.style.display = 'none'
+  }
   startBtn.style.display = "none";
+  timer.style.display = 'block';
   options.style.display = "flex";
 });
 
-// check answer and display next question
+// check answer and display next question on submit
 let questionArrayIndex = 0;
 submit.addEventListener("click", (e) => {
   e.preventDefault();
   // make sure at least one answer is chosen
-  if (document.querySelector('input[name="quizOptions"]:checked') == null){return}
-
-  submit.style.display = "none";
+  if (document.querySelector('input[name="quizOptions"]:checked') == null) {
+    return;
+  }
 
   //move on to next question after 1s
   setTimeout(questionArray[questionArrayIndex], 1000);
   questionArrayIndex++;
+
+  // remove button so user can't spam submit
+  submit.style.display = "none";
+
+  //fade out
+  options.setAttribute('class', 'fadeOut')
 
   // display if answer is right or wrong
   if (
@@ -169,7 +183,7 @@ submit.addEventListener("click", (e) => {
     rightOrWrong.innerHTML = "INCORRECT!";
     //deduct time
     timeLeft = timeLeft - 10;
-    timer.innerHTML = `${timeLeft} seconds remaining.`;
+    timer.innerHTML = `${timeLeft}`;
     // out of time
     if (timeLeft <= 0) {
       timer.innerHTML = `Times Up!`;
@@ -181,14 +195,14 @@ submit.addEventListener("click", (e) => {
 
 subHigh.addEventListener("click", function (e) {
   e.preventDefault();
+
   let userInput = userName.value;
   if (userInput === "") {
-    // add something to explain to user
     return;
   }
   // make user name and score into a string
   userHighScore = `${userInput}: ${score}`;
-  // push that string into local storage array 
+  // push that string into local storage array
   highScoresArray.push(userHighScore);
   localStorage.setItem("highscores", JSON.stringify(highScoresArray));
   // add latest score to page
@@ -206,7 +220,9 @@ function renderHighScores() {
     userScore.innerText = `${
       JSON.parse(localStorage.getItem("highscores"))[i]
     }`;
-    if (JSON.parse(localStorage.getItem("highscores"))[i] === undefined) {return}
+    if (JSON.parse(localStorage.getItem("highscores"))[i] === undefined) {
+      return;
+    }
     highScores.appendChild(userScore);
   }
 }
@@ -222,8 +238,8 @@ function renderNewScore() {
 
 const restartBtns = document.querySelectorAll(".reset");
 for (let button of restartBtns) {
-button.addEventListener("click", (e) => {
-  
-  e.preventDefault();
-  location.reload();
-});}
+  button.addEventListener("click", (e) => {
+    e.preventDefault();
+    location.reload();
+  });
+}
