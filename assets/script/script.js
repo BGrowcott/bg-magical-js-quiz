@@ -133,7 +133,7 @@ const countDown = function () {
       document.querySelector("#seeScore").style.display = "block";
     }
     // stop counter if quiz is complete - UPDATE if more questions are added.
-    if (questionArrayIndex === 5) {
+    if (questionArrayIndex === 4) {
       clearInterval(interval);
     }
   }, 1000);
@@ -150,16 +150,17 @@ startBtn.addEventListener("click", () => {
   options.style.display = "flex";
 });
 
-function nextQuestion () {
-  questionArray[questionArrayIndex]() 
-  document.querySelector('input[name="quizOptions"]:checked').checked = false; 
+//Function for loading next question
+function nextQuestion() {
+  questionArray[questionArrayIndex]();
+  document.querySelector('input[name="quizOptions"]:checked').checked = false;
   options.setAttribute("class", "fadeIn");
   rightOrWrong.innerHTML = "";
   submit.style.display = "block";
 }
 
 // check answer and display next question on submit
-let questionArrayIndex = 0;
+let questionArrayIndex = -1;
 submit.addEventListener("click", (e) => {
   e.preventDefault();
   // make sure at least one answer is chosen
@@ -194,7 +195,7 @@ submit.addEventListener("click", (e) => {
     timer.innerHTML = `${timeLeft}`;
     // out of time
     if (timeLeft <= 0) {
-      timer.innerHTML = `Times Up!`;
+      timer.innerHTML = `Time is Up!`;
     }
   }
 });
@@ -203,13 +204,15 @@ submit.addEventListener("click", (e) => {
 
 subHigh.addEventListener("click", function (e) {
   e.preventDefault();
-
+  // validate input
   let userInput = userName.value;
   if (userInput === "" || userInput.length > 6) {
-    document.querySelector('#inputError').innerHTML = 'Please enter no more than six characters.'
+    document.querySelector("#inputError").innerHTML =
+      "Please enter no more than six characters.";
     return;
   }
-  document.querySelector('#inputError').innerHTML = ''
+  // remove error message
+  document.querySelector("#inputError").innerHTML = "";
   // make user name and score into a string
   userHighScore = `${userInput}: ${score}`;
   // push that string into local storage array
