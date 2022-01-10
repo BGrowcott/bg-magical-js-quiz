@@ -93,7 +93,7 @@ const answerForm5 = function () {
   document.querySelector('input[name="quizOptions"]:checked').checked = false;
   rightOrWrong.innerHTML = "";
   submit.style.display = "block";
-  question.innerHTML = "Question5";
+  question.innerHTML = "What is the correct JavaScript syntax to change the content of the HTML element below?";
   document.querySelector('#demo').style.display = 'block'
   op1.setAttribute("value", "correct");
   op2.setAttribute("value", "incorrect");
