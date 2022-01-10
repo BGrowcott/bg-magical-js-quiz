@@ -45,15 +45,15 @@ const answerForm2 = function () {
   document.querySelector('input[name="quizOptions"]:checked').checked = false;
   rightOrWrong.innerHTML = "";
   submit.style.display = "block";
-  question.innerHTML = "Is Jichao Chinese?";
-  op1.setAttribute("value", "correct");
-  op2.setAttribute("value", "incorrect");
+  question.innerHTML = "What is the correct way to set up an interval?";
+  op1.setAttribute("value", "incorrect");
+  op2.setAttribute("value", "correct");
   op3.setAttribute("value", "incorrect");
   op4.setAttribute("value", "incorrect");
-  op1Label.innerHTML = "Yes";
-  op2Label.innerHTML = "No";
-  op3Label.innerHTML = "Maybe";
-  op4Label.innerHTML = "Don't know";
+  op1Label.innerHTML = "setInterval(1000, function () {element.innerHTML += 'Hello'});";
+  op2Label.innerHTML = "setInterval(function () {element.innerHTML += 'Hello'}, 1000);";
+  op3Label.innerHTML = "function () setInterval ({element.innerHTML += 'Hello'}, 1000);";
+  op4Label.innerHTML = "function () setInterval (1000, {element.innerHTML += 'Hello'});";
 };
 
 const answerForm3 = function () {
@@ -81,10 +81,10 @@ const answerForm4 = function () {
   op1.setAttribute("value", "incorrect");
   op2.setAttribute("value", "incorrect");
   op3.setAttribute("value", "incorrect");
-  op4.setAttribute("value", "incorrect");
+  op4.setAttribute("value", "correct");
   op1Label.innerHTML = "let dogs = 'Barry', 'Rocket', 'Francis'";
   op2Label.innerHTML = "let cats = [Tyrone], [Wilson], [Mr Cuddlesworth]";
-  op3Label.innerHTML = "let dogs = (Berry, Rocket, Francis)";
+  op3Label.innerHTML = "let dogs = (Barry, Rocket, Francis)";
   op4Label.innerHTML = "let cats = ['Tyrone', 'Wilson', 'Mr Cuddlesworth']";
 };
 
@@ -94,14 +94,15 @@ const answerForm5 = function () {
   rightOrWrong.innerHTML = "";
   submit.style.display = "block";
   question.innerHTML = "Question5";
-  op1.setAttribute("value", "incorrect");
+  document.querySelector('#demo').style.display = 'block'
+  op1.setAttribute("value", "correct");
   op2.setAttribute("value", "incorrect");
-  op3.setAttribute("value", "correct");
+  op3.setAttribute("value", "incorrect");
   op4.setAttribute("value", "incorrect");
-  op1Label.innerHTML = "answer1";
-  op2Label.innerHTML = "answer2";
-  op3Label.innerHTML = "answer3";
-  op4Label.innerHTML = "answer4";
+  op1Label.innerHTML = "#document.getElementById('demo').innerHTML = 'Hello World!'";
+  op2Label.innerHTML = "#demo.innerHTML = 'Hello World!'";
+  op3Label.innerHTML = "document.getElementByName('p').innerHTML = 'Hello World!'";
+  op4Label.innerHTML = "document.getElement('p').innerHTML = 'Hello World!'";
 };
 
 // Results view
@@ -109,6 +110,7 @@ const results = function () {
   renderHighScores();
   timer.style.display = "none";
   answers.style.display = "none";
+  document.querySelector('#demo').style.display = 'none'
   document.querySelector("#results").style.display = "block";
   document.querySelector('#results').setAttribute('class', 'fadeIn')
   document.querySelector("#result").innerHTML = score;
@@ -136,6 +138,10 @@ const countDown = function () {
       document.querySelector("#timesUp").style.display = "block";
       answers.style.display = "none";
     }
+    // stop counter if quiz is complete - UPDATE if more questions are added.
+    if (questionArrayIndex === 5) {
+      clearInterval(interval)
+    }
   }, 1000);
 };
 // Begin timer & start button disappears
@@ -159,15 +165,15 @@ submit.addEventListener("click", (e) => {
     return;
   }
 
+  //fade out
+  options.setAttribute('class', 'fadeOut')
+
   //move on to next question after 1s
   setTimeout(questionArray[questionArrayIndex], 1000);
   questionArrayIndex++;
 
   // remove button so user can't spam submit
   submit.style.display = "none";
-
-  //fade out
-  options.setAttribute('class', 'fadeOut')
 
   // display if answer is right or wrong
   if (
