@@ -35,7 +35,7 @@ h1 {
 }
 
 #quizContainer {
-    max-width: 600px;
+    max-width:700px;
   border-radius: 20px;
   box-shadow: 0px 0px 20px black;
   font-size: 110%;
@@ -65,6 +65,10 @@ h1 {
 #demo {
   display: none;
   font-family: monospace;
+  margin: 5px;
+  font-size: 110%;
+  box-shadow: 0px 0px 5px black;
+  padding: 3px;
 }
 
 #options {
@@ -142,4 +146,22 @@ button:focus {
 
 #submit {
   display: none;
+}
+
+#highScoresContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#highScores {
+    background-color: rgb(70, 79, 80);
+    color: beige;
+    width: 60%;
+    border-radius: 5px;
+}
+
+li:nth-child(even) {
+    background-color: rgb(106, 117, 117);
 }
