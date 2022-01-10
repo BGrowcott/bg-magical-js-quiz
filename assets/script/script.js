@@ -41,10 +41,6 @@ const answerForm1 = function () {
 };
 
 const answerForm2 = function () {
-  options.setAttribute("class", "fadeIn");
-  document.querySelector('input[name="quizOptions"]:checked').checked = false;
-  rightOrWrong.innerHTML = "";
-  submit.style.display = "block";
   question.innerHTML = "What is the correct way to set up an interval?";
   op1.setAttribute("value", "incorrect");
   op2.setAttribute("value", "correct");
@@ -61,10 +57,6 @@ const answerForm2 = function () {
 };
 
 const answerForm3 = function () {
-  options.setAttribute("class", "fadeIn");
-  document.querySelector('input[name="quizOptions"]:checked').checked = false;
-  rightOrWrong.innerHTML = "";
-  submit.style.display = "block";
   question.innerHTML = "How does a FOR loop start?";
   op1.setAttribute("value", "incorrect");
   op2.setAttribute("value", "incorrect");
@@ -77,10 +69,6 @@ const answerForm3 = function () {
 };
 
 const answerForm4 = function () {
-  options.setAttribute("class", "fadeIn");
-  document.querySelector('input[name="quizOptions"]:checked').checked = false;
-  rightOrWrong.innerHTML = "";
-  submit.style.display = "block";
   question.innerHTML = "What is the correct way to write a JavaScript array?";
   op1.setAttribute("value", "incorrect");
   op2.setAttribute("value", "incorrect");
@@ -93,10 +81,6 @@ const answerForm4 = function () {
 };
 
 const answerForm5 = function () {
-  options.setAttribute("class", "fadeIn");
-  document.querySelector('input[name="quizOptions"]:checked').checked = false;
-  rightOrWrong.innerHTML = "";
-  submit.style.display = "block";
   question.innerHTML =
     "What is the correct JavaScript syntax to change the content of the HTML element below?";
   document.querySelector("#demo").style.display = "block";
@@ -166,6 +150,14 @@ startBtn.addEventListener("click", () => {
   options.style.display = "flex";
 });
 
+function nextQuestion () {
+  questionArray[questionArrayIndex]() 
+  document.querySelector('input[name="quizOptions"]:checked').checked = false; 
+  options.setAttribute("class", "fadeIn");
+  rightOrWrong.innerHTML = "";
+  submit.style.display = "block";
+}
+
 // check answer and display next question on submit
 let questionArrayIndex = 0;
 submit.addEventListener("click", (e) => {
@@ -179,7 +171,7 @@ submit.addEventListener("click", (e) => {
   options.setAttribute("class", "fadeOut");
 
   //move on to next question after 1s
-  setTimeout(questionArray[questionArrayIndex], 1000);
+  setTimeout(nextQuestion, 1000);
   questionArrayIndex++;
 
   // remove button so user can't spam submit
@@ -213,9 +205,11 @@ subHigh.addEventListener("click", function (e) {
   e.preventDefault();
 
   let userInput = userName.value;
-  if (userInput === "") {
+  if (userInput === "" || userInput.length > 6) {
+    document.querySelector('#inputError').innerHTML = 'Please enter no more than six characters.'
     return;
   }
+  document.querySelector('#inputError').innerHTML = ''
   // make user name and score into a string
   userHighScore = `${userInput}: ${score}`;
   // push that string into local storage array
