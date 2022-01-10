@@ -24,7 +24,7 @@
   }
 }
 
-article {
+main {
   display: flex;
   justify-content: center;
 }
@@ -139,6 +139,10 @@ button:focus {
   box-shadow: inset 0px 0px 5px black;
 }
 
+#seeScore {
+    display: none;
+}
+
 #RorW {
   font-style: oblique;
   font-size: 150%;
@@ -155,6 +159,10 @@ button:focus {
     align-items: center;
 }
 
+li:nth-child(even) {
+    background-color: rgb(106, 117, 117);
+}
+
 #highScores {
     background-color: rgb(70, 79, 80);
     color: beige;
@@ -162,6 +170,11 @@ button:focus {
     border-radius: 5px;
 }
 
-li:nth-child(even) {
-    background-color: rgb(106, 117, 117);
+img {
+    width: 80px;
+}
+
+img:hover{
+    box-shadow: 0px 0px 15px orange;
+    transition: 0.5s;
 }

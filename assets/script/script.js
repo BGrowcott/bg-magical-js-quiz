@@ -16,7 +16,7 @@ const op4Label = document.querySelector("#op4Label");
 const subHigh = document.querySelector("#subHigh");
 const userName = document.querySelector("#name");
 const highScores = document.querySelector("#highScores");
-const instructions = document.getElementsByClassName('instructions')
+const instructions = document.getElementsByClassName("instructions");
 let score = 0;
 let highScoresArray = JSON.parse(localStorage.getItem("highscores"));
 
@@ -27,7 +27,7 @@ if (localStorage.getItem("highscores") == null) {
 
 // Questions
 const answerForm1 = function () {
-  options.setAttribute('class', 'fadeIn')
+  options.setAttribute("class", "fadeIn");
   submit.style.display = "block";
   question.innerHTML = "Which of these functions has INCORRECT syntax?";
   op1.setAttribute("value", "incorrect");
@@ -41,7 +41,7 @@ const answerForm1 = function () {
 };
 
 const answerForm2 = function () {
-  options.setAttribute('class', 'fadeIn')
+  options.setAttribute("class", "fadeIn");
   document.querySelector('input[name="quizOptions"]:checked').checked = false;
   rightOrWrong.innerHTML = "";
   submit.style.display = "block";
@@ -50,14 +50,18 @@ const answerForm2 = function () {
   op2.setAttribute("value", "correct");
   op3.setAttribute("value", "incorrect");
   op4.setAttribute("value", "incorrect");
-  op1Label.innerHTML = "setInterval(1000, function () {element.innerHTML += 'Hello'});";
-  op2Label.innerHTML = "setInterval(function () {element.innerHTML += 'Hello'}, 1000);";
-  op3Label.innerHTML = "function () setInterval ({element.innerHTML += 'Hello'}, 1000);";
-  op4Label.innerHTML = "function () setInterval (1000, {element.innerHTML += 'Hello'});";
+  op1Label.innerHTML =
+    "setInterval(1000, function () {element.innerHTML += 'Hello'});";
+  op2Label.innerHTML =
+    "setInterval(function () {element.innerHTML += 'Hello'}, 1000);";
+  op3Label.innerHTML =
+    "function () setInterval ({element.innerHTML += 'Hello'}, 1000);";
+  op4Label.innerHTML =
+    "function () setInterval (1000, {element.innerHTML += 'Hello'});";
 };
 
 const answerForm3 = function () {
-  options.setAttribute('class', 'fadeIn')
+  options.setAttribute("class", "fadeIn");
   document.querySelector('input[name="quizOptions"]:checked').checked = false;
   rightOrWrong.innerHTML = "";
   submit.style.display = "block";
@@ -73,7 +77,7 @@ const answerForm3 = function () {
 };
 
 const answerForm4 = function () {
-  options.setAttribute('class', 'fadeIn')
+  options.setAttribute("class", "fadeIn");
   document.querySelector('input[name="quizOptions"]:checked').checked = false;
   rightOrWrong.innerHTML = "";
   submit.style.display = "block";
@@ -89,30 +93,35 @@ const answerForm4 = function () {
 };
 
 const answerForm5 = function () {
-  options.setAttribute('class', 'fadeIn')
+  options.setAttribute("class", "fadeIn");
   document.querySelector('input[name="quizOptions"]:checked').checked = false;
   rightOrWrong.innerHTML = "";
   submit.style.display = "block";
-  question.innerHTML = "What is the correct JavaScript syntax to change the content of the HTML element below?";
-  document.querySelector('#demo').style.display = 'block'
+  question.innerHTML =
+    "What is the correct JavaScript syntax to change the content of the HTML element below?";
+  document.querySelector("#demo").style.display = "block";
   op1.setAttribute("value", "correct");
   op2.setAttribute("value", "incorrect");
   op3.setAttribute("value", "incorrect");
   op4.setAttribute("value", "incorrect");
-  op1Label.innerHTML = "#document.getElementById('demo').innerHTML = 'Hello World!'";
+  op1Label.innerHTML =
+    "#document.getElementById('demo').innerHTML = 'Hello World!'";
   op2Label.innerHTML = "#demo.innerHTML = 'Hello World!'";
-  op3Label.innerHTML = "document.getElementByName('p').innerHTML = 'Hello World!'";
+  op3Label.innerHTML =
+    "document.getElementByName('p').innerHTML = 'Hello World!'";
   op4Label.innerHTML = "document.getElement('p').innerHTML = 'Hello World!'";
 };
 
 // Results view
 const results = function () {
   renderHighScores();
+  document.querySelector("#timesUp").style.display = "none";
+  document.querySelector("#seeScore").style.display = "none";
   timer.style.display = "none";
   answers.style.display = "none";
-  document.querySelector('#demo').style.display = 'none'
+  document.querySelector("#demo").style.display = "none";
   document.querySelector("#results").style.display = "block";
-  document.querySelector('#results').setAttribute('class', 'fadeIn')
+  document.querySelector("#results").setAttribute("class", "fadeIn");
   document.querySelector("#result").innerHTML = score;
 };
 
@@ -137,10 +146,11 @@ const countDown = function () {
       timer.innerHTML = `Whoops! You ran out of time!`;
       document.querySelector("#timesUp").style.display = "block";
       answers.style.display = "none";
+      document.querySelector("#seeScore").style.display = "block";
     }
     // stop counter if quiz is complete - UPDATE if more questions are added.
     if (questionArrayIndex === 5) {
-      clearInterval(interval)
+      clearInterval(interval);
     }
   }, 1000);
 };
@@ -149,10 +159,10 @@ startBtn.addEventListener("click", countDown);
 startBtn.addEventListener("click", () => {
   answerForm1();
   for (let paragraphs of instructions) {
-    paragraphs.style.display = 'none'
+    paragraphs.style.display = "none";
   }
   startBtn.style.display = "none";
-  timer.style.display = 'block';
+  timer.style.display = "block";
   options.style.display = "flex";
 });
 
@@ -166,7 +176,7 @@ submit.addEventListener("click", (e) => {
   }
 
   //fade out
-  options.setAttribute('class', 'fadeOut')
+  options.setAttribute("class", "fadeOut");
 
   //move on to next question after 1s
   setTimeout(questionArray[questionArrayIndex], 1000);
@@ -239,6 +249,9 @@ function renderNewScore() {
   userScore.innerText = `${userHighScore}`;
   highScores.appendChild(userScore);
 }
+
+// See score on time out
+document.querySelector("#seeScore").addEventListener("click", results);
 
 //restart buttons
 
