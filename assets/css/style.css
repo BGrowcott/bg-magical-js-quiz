@@ -33,6 +33,10 @@ main {
   justify-content: center;
 }
 
+div {
+  margin: 10px;
+}
+
 /* Quiz container styles */
 
 #quizContainer {
@@ -99,6 +103,7 @@ h1 {
   font-family: monospace;
 }
 
+/* input styles */
 #options label {
   width: 90%;
   padding: 5px;
@@ -111,9 +116,7 @@ h1 {
   cursor: pointer;
 }
 
-div {
-  margin: 10px;
-}
+/* styles on timer */
 
 #timer {
   min-width: 65px;
@@ -128,6 +131,8 @@ div {
   box-shadow: 0px 0px 10px black;
 }
 
+/* hidden until updated by JavaScript */
+
 #results {
   display: none;
 }
@@ -135,6 +140,16 @@ div {
 #timesUp {
   display: none;
 }
+
+#seeScore {
+  display: none;
+}
+
+#submit {
+  display: none;
+}
+
+/* button styles */
 
 button {
   cursor: pointer;
@@ -146,24 +161,27 @@ button {
   box-shadow: 0px 0px 5px black;
   font-size: 120%;
   font-family: "Electrolize";
+  transition: 0.2s;
 }
 
 button:focus {
   box-shadow: inset 0px 0px 5px black;
+  border: 1px solid black;
 }
 
-#seeScore {
-  display: none;
+button:hover {
+  background-color: rgb(255, 255, 205);
 }
 
+
+
+/* Right or wrong style */
 #RorW {
   font-style: oblique;
   font-size: 150%;
 }
 
-#submit {
-  display: none;
-}
+/* High score table styles */
 
 #highScoresContainer {
   display: flex;
@@ -183,21 +201,26 @@ li:nth-child(even) {
   border-radius: 5px;
 }
 
+/* logo */
+
 img {
   width: 80px;
+  border-radius: 5px;
 }
 
 img:hover {
-  box-shadow: 0px 0px 15px orange;
+  box-shadow: 0px 0px 10px rgb(10, 1, 27);
   transition: 0.5s;
 }
+
+/* style for message - invalid input on high scores */
 
 #inputError {
   color: red;
   font-style: oblique;
 }
 
-/* Question bar styles - UPDATE if more questions added */
+/* Progress bar styles - UPDATE if more questions added */
 
 #questionBar {
   display: flex;

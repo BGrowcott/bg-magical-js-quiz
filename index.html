@@ -21,15 +21,21 @@
     <title>BG Javascript Quiz</title>
   </head>
   <body>
+      <!-- start -->
     <main>
+        <!-- Quiz Container -->
       <section id="quizContainer">
+          <!-- Main heading -->
         <h1>Ben's JavaScript Quiz</h1>
+        <!-- instructions -->
         <p class="instructions">You have 90 seconds to answer questions.</p>
         <p class="instructions">
           Incorrect answers will deduct 10 seconds from your time.
         </p>
         <p class="instructions">Press the start button to begin.</p>
+        <!-- timer -->
         <span id="timer">90</span>
+        <!-- progress bar -->
         <div id="questionBar">
           <div id="bar1"></div>
           <div id="bar2"></div>
@@ -37,14 +43,17 @@
           <div id="bar4"></div>
           <div id="bar5"></div>
         </div>
+        <!-- buttons -->
         <button id="startBtn">Start</button>
         <button id="timesUp" class="reset">Try Quiz Again?</button>
         <button id="seeScore">See your score</button>
+        <!-- question and answers container -->
         <div id="answers">
           <div id="question"></div>
           <p id="demo">
             &lt;p&gt; id="demo">This is a demonstration.&lt;/p&gt;
           </p>
+          <!-- questions options form -->
           <form id="options" action="post">
             <input id="op1" type="radio" name="quizOptions" />
             <label for="op1" id="op1Label"></label>
@@ -55,14 +64,17 @@
             <input id="op4" type="radio" name="quizOptions" />
             <label for="op4" id="op4Label"></label>
           </form>
+          <!-- submit button + right or wrong display -->
           <button id="submit">Submit</button>
           <p id="RorW"></p>
         </div>
+        <!-- Results page -->
         <div id="results">
           <p><strong>Congratulations!</strong></p>
           <p>
             You answered <span id="result">#</span> questions out of 5 correctly
           </p>
+              <!-- High scores -->
           <form action="post">
             <div id="highScoresContainer">
               <h2>Highscores:</h2>
@@ -72,12 +84,16 @@
             <input type="text" id="name" /><br />
             <span id="inputError"></span><br />
             <button id="subHigh">Submit</button><br />
+            <!-- Try again -->
             <button class="reset">Try Quiz Again?</button>
           </form>
         </div>
+        <!-- logo -->
         <img src="assets/images/bgart.jpg" alt="BG coding logo" />
       </section>
+      <!-- end -->
     </main>
+    <!-- script -->
     <script src="assets/script/script.js"></script>
   </body>
 </html>
