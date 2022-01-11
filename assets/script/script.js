@@ -104,11 +104,11 @@ const answerForm5 = function () {
   op3.setAttribute("value", "incorrect");
   op4.setAttribute("value", "incorrect");
   op1Label.innerHTML =
-    "#document.getElementById('demo').innerHTML = 'Hello World!'";
+    "#document.getElementById ('demo').innerHTML = 'Hello World!'";
   op2Label.innerHTML = "#demo.innerHTML = 'Hello World!'";
   op3Label.innerHTML =
-    "document.getElementByName('p').innerHTML = 'Hello World!'";
-  op4Label.innerHTML = "document.getElement('p').innerHTML = 'Hello World!'";
+    "document.getElementByName ('p').innerHTML = 'Hello World!'";
+  op4Label.innerHTML = "document.getElement ('p').innerHTML = 'Hello World!'";
 };
 
 // Results view
