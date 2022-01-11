@@ -29,19 +29,15 @@ main {
   justify-content: center;
 }
 
-h1 {
-  font-size: 150%;
-  padding-bottom: 30px;
-}
-
 #quizContainer {
-    max-width:900px;
-    min-width: 595px;
+  max-width:900px;
+  min-width: 440px;
   border-radius: 20px;
   box-shadow: 0px 0px 20px black;
   font-size: 110%;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
+  font-family: 'Electrolize';
   padding: 20px;
   text-align: center;
   display: flex;
@@ -50,9 +46,15 @@ h1 {
   flex-direction: column;
   border: 5px solid black;
   width: 90%;
-  margin-top: 50px;
+  margin-top: 10px;
   line-height: 150%;
-  background-color: rgb(201, 247, 250);
+  background-color: rgb(223, 253, 255);
+}
+
+h1 {
+  font-size: 150%;
+  padding-bottom: 30px;
+  font-family: Pacifico;
 }
 
 #answers {
@@ -73,6 +75,7 @@ h1 {
 }
 
 #options {
+  min-width: 430px;
   font-size: 110%;
   width: 80%;
   background-color: rgb(70, 79, 80);
@@ -104,12 +107,13 @@ div {
 }
 
 #timer {
+  min-width: 71px;
   border-radius: 5px;
   border: 2px dotted black;
   display: none;
   margin: 10px;
-  color: red;
-  font-size: 200%;
+  color: rgb(219, 2, 2);
+  font-size: 180%;
   padding: 5px;
   background-color: honeydew;
   box-shadow: 0px 0px 10px black;
@@ -132,8 +136,7 @@ button {
   background-color: yellow;
   box-shadow: 0px 0px 5px black;
   font-size: 120%;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: 'Electrolize';
 }
 
 button:focus {

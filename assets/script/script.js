@@ -132,7 +132,7 @@ const countDown = function () {
       answers.style.display = "none";
       document.querySelector("#seeScore").style.display = "block";
     }
-    // stop counter if quiz is complete - UPDATE if more questions are added.
+    // stop counter if quiz is complete - !UPDATE! if more questions are added.
     if (questionArrayIndex === 4) {
       clearInterval(interval);
     }
