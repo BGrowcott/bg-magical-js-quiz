@@ -17,6 +17,11 @@ const subHigh = document.querySelector("#subHigh");
 const userName = document.querySelector("#name");
 const highScores = document.querySelector("#highScores");
 const instructions = document.getElementsByClassName("instructions");
+const questionBar1 = document.querySelector('#bar1')
+const questionBar2 = document.querySelector('#bar2')
+const questionBar3 = document.querySelector('#bar3')
+const questionBar4 = document.querySelector('#bar4')
+const questionBar5 = document.querySelector('#bar5')
 let score = 0;
 let highScoresArray = JSON.parse(localStorage.getItem("highscores"));
 
@@ -28,6 +33,8 @@ if (localStorage.getItem("highscores") == null) {
 // Questions
 const answerForm1 = function () {
   options.setAttribute("class", "fadeIn");
+  questionBar1.style.display = 'block'
+  questionBar1.setAttribute('class', 'fadeIn')
   submit.style.display = "block";
   question.innerHTML = "Which of these functions has INCORRECT syntax?";
   op1.setAttribute("value", "incorrect");
@@ -41,6 +48,8 @@ const answerForm1 = function () {
 };
 
 const answerForm2 = function () {
+  questionBar2.style.display = 'block'
+  questionBar2.setAttribute('class', 'fadeIn')
   question.innerHTML = "What is the correct way to set up an interval?";
   op1.setAttribute("value", "incorrect");
   op2.setAttribute("value", "correct");
@@ -57,6 +66,8 @@ const answerForm2 = function () {
 };
 
 const answerForm3 = function () {
+  questionBar3.style.display = 'block'
+  questionBar3.setAttribute('class', 'fadeIn')
   question.innerHTML = "How does a FOR loop start?";
   op1.setAttribute("value", "incorrect");
   op2.setAttribute("value", "incorrect");
@@ -69,6 +80,8 @@ const answerForm3 = function () {
 };
 
 const answerForm4 = function () {
+  questionBar4.style.display = 'block'
+  questionBar4.setAttribute('class', 'fadeIn')
   question.innerHTML = "What is the correct way to write a JavaScript array?";
   op1.setAttribute("value", "incorrect");
   op2.setAttribute("value", "incorrect");
@@ -81,6 +94,8 @@ const answerForm4 = function () {
 };
 
 const answerForm5 = function () {
+  questionBar5.style.display = 'block'
+  questionBar5.setAttribute('class', 'fadeIn')
   question.innerHTML =
     "What is the correct JavaScript syntax to change the content of the HTML element below?";
   document.querySelector("#demo").style.display = "block";
@@ -98,6 +113,7 @@ const answerForm5 = function () {
 
 // Results view
 const results = function () {
+  document.querySelector('#questionBar').style.display ='none'
   renderHighScores();
   document.querySelector("#timesUp").style.display = "none";
   document.querySelector("#seeScore").style.display = "none";
@@ -119,7 +135,7 @@ let questionArray = [
 ];
 
 // Timer function
-let timeLeft = 60;
+let timeLeft = 90;
 const countDown = function () {
   let interval = setInterval(function () {
     timeLeft--;
@@ -195,7 +211,7 @@ submit.addEventListener("click", (e) => {
     timer.innerHTML = `${timeLeft}`;
     // out of time
     if (timeLeft <= 0) {
-      timer.innerHTML = `Time is Up!`;
+      timer.innerHTML = `Whoops! You ran out of time!`;
     }
   }
 });
