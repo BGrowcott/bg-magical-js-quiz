@@ -23,12 +23,12 @@ const questionBar3 = document.querySelector('#bar3')
 const questionBar4 = document.querySelector('#bar4')
 const questionBar5 = document.querySelector('#bar5')
 let score = 0;
-let highScoresArray = JSON.parse(localStorage.getItem("highscores"));
 
 // if local storage is empty give it an empty array to start off with
 if (localStorage.getItem("highscores") == null) {
   localStorage.setItem("highscores", "[]");
 }
+let highScoresArray = JSON.parse(localStorage.getItem("highscores"));
 
 // Questions
 const answerForm1 = function () {
@@ -194,7 +194,7 @@ submit.addEventListener("click", (e) => {
   // remove button so user can't spam submit
   submit.style.display = "none";
 
-  // display if answer is right or wrong
+  // display if answer is right or wrong & increase score/deduct time
   if (
     document.querySelector('input[name="quizOptions"]:checked').value ===
     "correct"
